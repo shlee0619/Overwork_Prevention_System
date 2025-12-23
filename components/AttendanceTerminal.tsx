@@ -15,7 +15,7 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
-  const [feedbackMessage, setFeedbackMessage] = useState("Initializing camera...");
+  const [feedbackMessage, setFeedbackMessage] = useState("카메라 초기화 중...");
   const [lastRecord, setLastRecord] = useState<AttendanceRecord | null>(null);
   const [permissionDenied, setPermissionDenied] = useState(false);
 
@@ -42,15 +42,15 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
         if (videoRef.current) {
           videoRef.current.srcObject = mediaStream;
         }
-        setFeedbackMessage("Align your face within the frame");
+        setFeedbackMessage("프레임 안에 얼굴을 맞춰주세요");
       } catch (err: any) {
         console.error("Error accessing camera:", err);
         if (isMounted) {
           if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
             setPermissionDenied(true);
-            setFeedbackMessage("Camera access denied");
+            setFeedbackMessage("카메라 접근이 거부되었습니다");
           } else {
-            setFeedbackMessage("Camera unavailable: " + err.message);
+            setFeedbackMessage("카메라 사용 불가: " + err.message);
           }
         }
       }
@@ -86,7 +86,7 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
 
     setIsScanning(true);
     setScanProgress(0);
-    setFeedbackMessage("Keep still. Analyzing vital signs...");
+    setFeedbackMessage("움직이지 마세요. 생체 신호 분석 중...");
 
     // Simulate scanning progress
     const interval = setInterval(() => {
@@ -152,12 +152,12 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
       setLastRecord(newRecord);
       onScanComplete(newRecord);
       setIsScanning(false);
-      setFeedbackMessage(`Welcome, ${employee.name}. Scan Complete.`);
+      setFeedbackMessage(`${employee.name}님 환영합니다. 스캔 완료.`);
       
       // Reset after a delay
       setTimeout(() => {
         setLastRecord(null);
-        setFeedbackMessage("Align your face within the frame");
+        setFeedbackMessage("프레임 안에 얼굴을 맞춰주세요");
         setScanProgress(0);
       }, 5000); 
 
@@ -178,16 +178,16 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
                 <div className="bg-red-500/20 p-4 rounded-full mb-4">
                     <CameraOff className="w-12 h-12 text-red-500" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">Camera Access Required</h2>
+                <h2 className="text-xl font-bold text-white mb-2">카메라 접근 필요</h2>
                 <p className="text-gray-400 mb-6">
-                    This system requires camera access to scan biometrics. Please enable camera permissions in your browser settings.
+                    생체 정보를 스캔하기 위해 카메라 접근 권한이 필요합니다. 브라우저 설정에서 카메라 권한을 허용해주세요.
                 </p>
                 <button 
                     onClick={handleRetryPermission}
                     className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2 pointer-events-auto"
                 >
                     <RefreshCw className="w-4 h-4" />
-                    Reload Page
+                    페이지 새로고침
                 </button>
             </div>
         )}
@@ -257,7 +257,7 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
                 <h2 className="text-2xl font-bold text-white">{lastRecord.employeeName}</h2>
                 <div className="flex gap-4 mt-2 text-sm font-mono text-white/90">
                     <span className="flex items-center gap-1"><Clock size={14}/> {lastRecord.timestamp.toLocaleTimeString()}</span>
-                    <span>Status: {lastRecord.status}</span>
+                    <span>상태: {lastRecord.status === 'GOOD' ? '정상' : '위험'}</span>
                 </div>
                 </div>
             </div>
@@ -273,7 +273,7 @@ const AttendanceTerminal: React.FC<AttendanceTerminalProps> = ({ onScanComplete,
           className="absolute bottom-32 z-20 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-500 text-white px-8 py-4 rounded-full font-bold shadow-lg flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
         >
           <Camera className="w-6 h-6" />
-          {stream ? "Start Scan" : "Initializing..."}
+          {stream ? "스캔 시작" : "준비 중..."}
         </button>
       )}
 

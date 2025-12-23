@@ -61,9 +61,9 @@ const App: React.FC = () => {
       
       {/* Sidebar / Bottom Bar Navigation */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-4 p-2 bg-gray-900/90 backdrop-blur-md rounded-2xl border border-gray-700 shadow-2xl">
-        <NavButton view="TERMINAL" icon={ScanLine} label="Scan" />
-        <NavButton view="EMPLOYEE" icon={UserCircle} label="My App" />
-        <NavButton view="MANAGER" icon={LayoutDashboard} label="Admin" />
+        <NavButton view="TERMINAL" icon={ScanLine} label="스캔" />
+        <NavButton view="EMPLOYEE" icon={UserCircle} label="내 앱" />
+        <NavButton view="MANAGER" icon={LayoutDashboard} label="관리자" />
       </div>
 
       {/* Main Content Area */}
@@ -95,7 +95,7 @@ const App: React.FC = () => {
       {/* Intro Toast for Demo Context (Only on Terminal) */}
       {records.length === INITIAL_RECORDS.length && currentView === 'TERMINAL' && (
         <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-blue-900/80 text-blue-100 px-6 py-3 rounded-full text-sm font-medium backdrop-blur-sm border border-blue-500/30 animate-pulse pointer-events-none z-40">
-           Demo: Please allow camera access to start attendance.
+           데모: 근태 기록을 시작하려면 카메라 접근을 허용해주세요.
         </div>
       )}
     </div>

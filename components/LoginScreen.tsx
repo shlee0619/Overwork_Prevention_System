@@ -22,7 +22,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     if (employee) {
       onLogin(employee);
     } else {
-      setError('Invalid ID or Password. (Try ID: E001, Pass: 1234)');
+      setError('ID 또는 비밀번호가 잘못되었습니다. (예시 ID: E001, 비번: 1234)');
     }
   };
 
@@ -33,8 +33,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-600/20 mb-4">
             <User className="w-8 h-8 text-blue-500" />
           </div>
-          <h2 className="text-2xl font-bold text-white">Employee Login</h2>
-          <p className="text-gray-400 text-sm mt-2">Access your personal health history</p>
+          <h2 className="text-2xl font-bold text-white">직원 로그인</h2>
+          <p className="text-gray-400 text-sm mt-2">개인 건강 기록 조회</p>
         </div>
 
         <form onSubmit={handleLogin} className="p-8 space-y-6">
@@ -46,21 +46,21 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           )}
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300 ml-1">Employee ID</label>
+            <label className="text-sm font-medium text-gray-300 ml-1">사원 번호</label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               <input
                 type="text"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
-                placeholder="e.g. E001"
+                placeholder="예: E001"
                 className="w-full bg-gray-900 border border-gray-700 text-white rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300 ml-1">Password</label>
+            <label className="text-sm font-medium text-gray-300 ml-1">비밀번호</label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               <input
@@ -78,13 +78,13 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20"
           >
             <LogIn size={20} />
-            Sign In
+            로그인
           </button>
         </form>
         
         <div className="bg-gray-900/50 p-4 text-center border-t border-gray-700">
           <p className="text-xs text-gray-500">
-            Authorized personnel only. All access is logged.
+            관계자 외 접근 금지. 모든 접속은 기록됩니다.
           </p>
         </div>
       </div>

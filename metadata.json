@@ -1,6 +1,6 @@
 {
   "name": "과로사방지시스템_demo5",
-  "description": "플로우차트를 기반으로 제작.\n",
+  "description": "플로우차트를 기반으로 제작된 과로사 방지 근태 관리 시스템.\n",
   "requestFramePermissions": [
     "camera"
   ]
